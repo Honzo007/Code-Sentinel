@@ -206,23 +206,24 @@ PAGE = r"""{% raw %}<!doctype html>
 <title>Code Sentinel</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 4 6.5v8.2C4 22.3 9 27.8 16 30c7-2.2 12-7.7 12-15.3V6.5z' fill='%232f6fed'/%3E%3C/svg%3E">
 <style>
-:root{--bg:#f3f7fb;--card:#fff;--text:#1f2a37;--muted:#5d6b7e;--line:#dde5ee;--accent:#2f6fed;--accent-soft:#e8f0fe;
+:root{--bg:#fbf5e6;--head:#5a6270;--card:#fff;--text:#1f2a37;--muted:#5d6b7e;--line:#e6dcc3;--accent:#2f6fed;--accent-soft:#e8f0fe;
 --ok:#1a7f55;--ok-soft:#e6f6ee;--bad:#c13a3a;--bad-soft:#fdecec;--warn:#9a5f08;--warn-soft:#fff4d6;color-scheme:light}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.top{background:#fff;border-bottom:1px solid var(--line)}
+.top{background:#fffaf0;border-bottom:1px solid var(--line)}
 .wrap{max-width:960px;margin:0 auto;padding:0 20px}
 .brand{display:flex;align-items:center;gap:10px;height:64px}
 .logo{color:var(--accent);flex:none}
-.brand-name{font-weight:700;font-size:1.15rem}
+.brand-name{font-weight:700;font-size:1.15rem;color:var(--head)}
 main{padding:28px 20px 72px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 1px 2px rgba(31,42,55,.05)}
-.hero{background:#eef4ff;border-color:#cfdffb;padding:30px 24px}
-h1{font-size:1.8rem;line-height:1.25;margin:0 0 6px}
-h2{font-size:1.1rem;margin:0 0 10px}
+.hero{background:#efe2c0;border-color:#d9c9a0;padding:30px 24px}
+h1{font-size:1.8rem;line-height:1.25;margin:0 0 6px;color:var(--head)}
+h2{font-size:1.1rem;margin:0 0 10px;color:var(--head)}
 .lead{color:var(--muted);margin:0 0 20px}
+.hero .lead{color:#4a5568}
 form{display:flex;gap:10px;flex-wrap:wrap}
-input{flex:1 1 320px;padding:13px 14px;border:1px solid #bccde3;border-radius:10px;background:#fff;color:var(--text);font:inherit}
+input{flex:1 1 320px;padding:13px 14px;border:1px solid #d8cdb0;border-radius:10px;background:#fff;color:var(--text);font:inherit}
 button{padding:13px 22px;border:0;border-radius:10px;background:var(--accent);color:#fff;font:inherit;font-weight:600;cursor:pointer}
 #go:hover:not(:disabled){background:#2559c7}
 button:disabled{opacity:.6;cursor:not-allowed}
@@ -257,7 +258,7 @@ details{margin:0 0 16px}summary{cursor:pointer;color:var(--muted)}
 .score-top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
 .score-num{font-size:2.6rem;font-weight:700;line-height:1;color:var(--c)}
 .score-label{font-weight:600;color:var(--c);margin-left:auto}
-.bar{height:10px;border-radius:99px;background:#e6ecf3;margin:12px 0;overflow:hidden}
+.bar{height:10px;border-radius:99px;background:#efe6d0;margin:12px 0;overflow:hidden}
 .bar i{display:block;height:100%;width:0;background:var(--c);transition:width 1s ease-out}
 table{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:8px}
 th,td{text-align:left;padding:6px 4px;border-top:1px solid var(--line)}
