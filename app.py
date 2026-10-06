@@ -204,155 +204,188 @@ PAGE = r"""{% raw %}<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Code Sentinel</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 4 6.5v8.2C4 22.3 9 27.8 16 30c7-2.2 12-7.7 12-15.3V6.5z' fill='%232457d6'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 4 6.5v8.2C4 22.3 9 27.8 16 30c7-2.2 12-7.7 12-15.3V6.5z' fill='%232f6fed'/%3E%3C/svg%3E">
 <style>
-:root{--bg:#f6f7f9;--card:#fff;--text:#1b1f24;--muted:#5b6570;--line:#d8dde3;--accent:#2457d6;
---ok:#1a7f45;--okbg:#e4f5ea;--bad:#c42b2b;--badbg:#fbe9e9;--warn:#9a6700;--warnbg:#fff3d1;--act:#e8efff}
-@media (prefers-color-scheme:dark){:root{--bg:#14171b;--card:#1c2026;--text:#e8ebef;--muted:#99a3ae;--line:#323a44;
---accent:#7ca2ff;--ok:#5fd18b;--okbg:#17301f;--bad:#ff8585;--badbg:#3a1c1c;--warn:#f0c14b;--warnbg:#3a3015;--act:#1e2a45}}
+:root{--bg:#f3f7fb;--card:#fff;--text:#1f2a37;--muted:#5d6b7e;--line:#dde5ee;--accent:#2f6fed;--accent-soft:#e8f0fe;
+--ok:#1a7f55;--ok-soft:#e6f6ee;--bad:#c13a3a;--bad-soft:#fdecec;--warn:#9a5f08;--warn-soft:#fff4d6;color-scheme:light}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
-main{max-width:760px;margin:0 auto;padding:32px 16px 64px}
-.brand{display:flex;align-items:center;gap:10px;margin-bottom:28px}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.top{background:#fff;border-bottom:1px solid var(--line)}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+.brand{display:flex;align-items:center;gap:10px;height:64px}
 .logo{color:var(--accent);flex:none}
-.brand-name{font-size:1.3rem;font-weight:700;letter-spacing:-.01em}
-h1{font-size:1.9rem;margin:0 0 6px;line-height:1.2}
-.lead{color:var(--muted);margin:0 0 24px}
-form{display:flex;gap:8px;flex-wrap:wrap}
-input{flex:1 1 320px;padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);font:inherit}
-button{padding:11px 18px;border:0;border-radius:8px;background:var(--accent);color:#fff;font:inherit;font-weight:600;cursor:pointer}
-@media (prefers-color-scheme:dark){button{color:#0b1220}}
-button:disabled{opacity:.55;cursor:not-allowed}
-:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-#error{display:none;margin-top:14px;padding:12px 14px;border-radius:8px;background:var(--badbg);color:var(--bad);border:1px solid var(--bad)}
-.steps{display:none;grid-template-columns:repeat(4,1fr);gap:8px;margin:22px 0}
-@media (max-width:560px){.steps{grid-template-columns:repeat(2,1fr)}}
-.step{padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);transition:background .2s}
+.brand-name{font-weight:700;font-size:1.15rem}
+main{padding:28px 20px 72px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 1px 2px rgba(31,42,55,.05)}
+.hero{background:#eef4ff;border-color:#cfdffb;padding:30px 24px}
+h1{font-size:1.8rem;line-height:1.25;margin:0 0 6px}
+h2{font-size:1.1rem;margin:0 0 10px}
+.lead{color:var(--muted);margin:0 0 20px}
+form{display:flex;gap:10px;flex-wrap:wrap}
+input{flex:1 1 320px;padding:13px 14px;border:1px solid #bccde3;border-radius:10px;background:#fff;color:var(--text);font:inherit}
+button{padding:13px 22px;border:0;border-radius:10px;background:var(--accent);color:#fff;font:inherit;font-weight:600;cursor:pointer}
+#go:hover:not(:disabled){background:#2559c7}
+button:disabled{opacity:.6;cursor:not-allowed}
+:focus-visible{outline:3px solid #8fb3ff;outline-offset:2px}
+.hint{margin:10px 0 0;font-size:.9rem;color:var(--muted)}
+#error{display:none;margin-top:14px;padding:12px 14px;border-radius:10px;background:var(--bad-soft);color:var(--bad);border:1px solid #f1b9b9;overflow-wrap:anywhere}
+.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent);padding:10px 16px}
+.ghost:hover{background:var(--accent-soft)}
+details{margin:0 0 16px}summary{cursor:pointer;color:var(--muted)}
+.hist{display:flex;justify-content:space-between;gap:8px;width:100%;text-align:left;background:#fff;color:var(--text);border:1px solid var(--line);margin-top:6px;font-weight:400;padding:10px 14px}
+.hist:hover{background:var(--accent-soft)}
+.steps{display:none;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+@media (max-width:640px){.steps{grid-template-columns:repeat(2,1fr)}}
+.step{position:relative;overflow:hidden;display:flex;gap:10px;align-items:center;padding:12px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.num{flex:none;width:28px;height:28px;border-radius:50%;background:var(--line);color:var(--muted);display:grid;place-items:center;font-style:normal;font-weight:600;font-size:.85rem}
 .step b{display:block;font-size:.95rem}.step span{font-size:.85rem;color:var(--muted)}
-.step.running{background:var(--act);border-color:var(--accent)}
-.step.done{background:var(--okbg);border-color:var(--ok)}
-.step.error{background:var(--badbg);border-color:var(--bad)}
-.panel{margin:0 0 16px;padding:16px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
-.panel h2{font-size:1.1rem;margin:0 0 10px}
-.verdict{border-width:2px}.verdict h2{font-size:1.35rem}
-.verdict.approve{background:var(--okbg);border-color:var(--ok)}
-.verdict.request_changes{background:var(--badbg);border-color:var(--bad)}
-.verdict.comment{background:var(--warnbg);border-color:var(--warn)}
-.meta{color:var(--muted);font-size:.92rem}
-.issue{padding:12px 0;border-top:1px solid var(--line)}
-.issue:first-of-type{border-top:0}
-.sev{display:inline-block;padding:1px 8px;margin-right:8px;border-radius:99px;font-size:.8rem;font-weight:600;border:1px solid currentColor}
-.high .sev{color:var(--bad)}.medium .sev{color:var(--warn)}.low .sev{color:var(--muted)}
-code{display:block;font:.85rem ui-monospace,Menlo,Consolas,monospace;color:var(--muted);margin:4px 0;overflow-wrap:anywhere}
-.issue p{margin:4px 0}.fix{color:var(--ok)}
-a{color:var(--accent)}
-.step{position:relative;overflow:hidden}
+.step.running{background:var(--accent-soft);border-color:#b9cffb}.step.running .num{background:var(--accent);color:#fff}
 .step.running::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:40%;background:var(--accent);animation:slide 1.2s ease-in-out infinite}
 .step.running span::before{content:"";display:inline-block;width:10px;height:10px;margin-right:6px;border:2px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite;vertical-align:-1px}
+.step.done{background:var(--ok-soft);border-color:#b5e3cc}.step.done .num{background:var(--ok);color:#fff}
+.step.error{background:var(--bad-soft);border-color:#f1b9b9}.step.error .num{background:var(--bad);color:#fff}
 @keyframes slide{0%{transform:translateX(-100%)}100%{transform:translateX(250%)}}
 @keyframes spin{to{transform:rotate(360deg)}}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.grid2>div:empty{display:none}
+@media (max-width:700px){.grid2{grid-template-columns:1fr}}
+.label{font-size:.85rem;color:var(--muted);margin-bottom:2px}
+.big{font-size:1.5rem;font-weight:700;margin-bottom:6px}
+.v-approve{border-left:6px solid var(--ok)}.v-approve .big{color:var(--ok)}
+.v-request_changes{border-left:6px solid var(--bad)}.v-request_changes .big{color:var(--bad)}
+.v-comment{border-left:6px solid var(--warn)}.v-comment .big{color:var(--warn)}
 .risk-low{--c:var(--ok)}.risk-medium{--c:var(--warn)}.risk-high{--c:var(--bad)}
-.score-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.score-num{font-size:3rem;font-weight:700;line-height:1;color:var(--c)}
-.score-label{font-weight:600;color:var(--c)}
-.bar{height:10px;border-radius:99px;background:var(--line);margin:12px 0;overflow:hidden}
+.score-top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.score-num{font-size:2.6rem;font-weight:700;line-height:1;color:var(--c)}
+.score-label{font-weight:600;color:var(--c);margin-left:auto}
+.bar{height:10px;border-radius:99px;background:#e6ecf3;margin:12px 0;overflow:hidden}
 .bar i{display:block;height:100%;width:0;background:var(--c);transition:width 1s ease-out}
-table{width:100%;border-collapse:collapse;font-size:.92rem}
+table{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:8px}
 th,td{text-align:left;padding:6px 4px;border-top:1px solid var(--line)}
-.actions{margin:0 0 16px;display:flex;gap:8px}.actions:empty{display:none}
-.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
-details{margin-top:16px}summary{cursor:pointer;color:var(--muted)}
-.hist{display:flex;justify-content:space-between;gap:8px;width:100%;text-align:left;background:transparent;color:var(--text);border:1px solid var(--line);margin-top:6px;font-weight:400}
+.actions{margin:0 0 16px}.actions:empty{display:none}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.chip{background:var(--accent-soft);color:#1d4fb8;padding:3px 10px;border-radius:99px;font-size:.85rem}
+.chip.add{background:var(--ok-soft);color:var(--ok)}.chip.del{background:var(--bad-soft);color:var(--bad)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:#fff;color:var(--text);border:1px solid var(--line);padding:8px 14px;font-weight:500}
+.tab:hover:not(.active){background:var(--accent-soft)}
+.tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tab .n{margin-left:6px;opacity:.8}
+.finding{border:1px solid var(--line);border-left-width:5px;border-radius:10px;padding:14px 16px;margin-bottom:12px;background:#fff}
+.sev-high{border-left-color:var(--bad)}.sev-medium{border-left-color:var(--warn)}.sev-low{border-left-color:#7b8da3}
+.f-head{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.pill{padding:2px 10px;border-radius:99px;font-size:.8rem;font-weight:600}
+.sev-high .pill{background:var(--bad-soft);color:var(--bad)}.sev-medium .pill{background:var(--warn-soft);color:var(--warn)}.sev-low .pill{background:#eef1f5;color:#52627a}
+.cat{font-size:.8rem;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:1px 8px}
+.f-file{display:inline-block;margin:8px 0;padding:3px 8px;border-radius:6px;background:var(--bg);color:var(--muted);font:.85rem ui-monospace,Menlo,Consolas,monospace;overflow-wrap:anywhere}
+dl{margin:4px 0 0;display:grid;grid-template-columns:110px 1fr;gap:8px 12px}
+dt{font-weight:600;color:var(--muted);font-size:.9rem}dd{margin:0}
+dd.fix{background:var(--ok-soft);padding:6px 10px;border-radius:8px}
+@media (max-width:560px){dl{grid-template-columns:1fr;gap:2px}dt{margin-top:8px}}
+a{color:#1d4fb8}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
-<main>
-<header class="brand">
-  <svg class="logo" viewBox="0 0 32 32" width="40" height="40" aria-hidden="true">
+<header class="top"><div class="wrap brand">
+  <svg class="logo" viewBox="0 0 32 32" width="36" height="36" aria-hidden="true">
     <path d="M16 2 4 6.5v8.2C4 22.3 9 27.8 16 30c7-2.2 12-7.7 12-15.3V6.5z" fill="currentColor"/>
-    <path d="m13 12-4 4 4 4M19 12l4 4-4 4" fill="none" stroke="var(--bg)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="m13 12-4 4 4 4M19 12l4 4-4 4" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
   <span class="brand-name">Code Sentinel</span>
-</header>
-<h1>Check a pull request before you merge it</h1>
-<p class="lead">This app only reads the pull request. It never changes anything on GitHub.</p>
-<form id="form">
-  <input id="url" type="url" required placeholder="https://github.com/owner/repo/pull/12" aria-label="Pull request link">
-  <button id="go" type="submit">Analyze PR</button>
-</form>
+</div></header>
+<main class="wrap">
+<section class="card hero">
+  <h1>Check a pull request before you merge it</h1>
+  <p class="lead">Paste a GitHub pull request link. This app only reads the pull request and never changes anything on GitHub.</p>
+  <form id="form">
+    <input id="url" type="url" required placeholder="https://github.com/owner/repo/pull/12" aria-label="Pull request link">
+    <button id="go" type="submit">Analyze PR</button>
+  </form>
+  <div id="error" role="alert"></div>
+</section>
 <div id="history"></div>
-<div id="error" class="error" role="alert"></div>
 <div id="steps" class="steps" aria-live="polite"></div>
-<div id="results">
-  <div id="verdict"></div><div id="score"></div><div id="actions" class="actions"></div><div id="pr"></div><div id="bugs"></div><div id="security"></div>
+<div id="results" hidden>
+  <div class="grid2"><div id="verdict"></div><div id="score"></div></div>
+  <div id="actions" class="actions"></div>
+  <div id="pr"></div>
+  <div id="findings"></div>
 </div>
 </main>
 <script>
-const STEPS=[["fetch","1. Fetch PR"],["bugs","2. Check bugs"],["security","3. Check security"],["summary","4. Summarize"]];
+const STEPS=[["fetch","Fetch PR"],["bugs","Check bugs"],["security","Check security"],["summary","Summarize"]];
 const LABEL={waiting:"Waiting",running:"Working",done:"Done",error:"Failed"};
+const SEV={high:"High",medium:"Medium",low:"Low"};
+const ORDER={high:0,medium:1,low:2};
+const POINTS={high:25,medium:10,low:3};
+const LEVEL={low:"Low risk",medium:"Medium risk",high:"High risk"};
+const VERDICT={approve:"Looks good to merge",request_changes:"Changes needed",comment:"Worth a look"};
 const $=id=>document.getElementById(id);
 const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let cur={},tab="all";
 
-function setStep(id,state){
-  const el=$("step-"+id);
-  el.className="step "+state;
-  el.querySelector("span").textContent=LABEL[state];
-}
+function setStep(id,state){const el=$("step-"+id);el.className="step "+state;el.querySelector("span").textContent=LABEL[state];}
 function resetUI(){
   $("error").style.display="none";
-  ["verdict","score","actions","pr","bugs","security"].forEach(k=>$(k).innerHTML="");
-  $("steps").innerHTML=STEPS.map(([id,name])=>`<div class="step waiting" id="step-${id}"><b>${esc(name)}</b><span>Waiting</span></div>`).join("");
+  $("results").hidden=true;
+  ["verdict","score","actions","pr","findings"].forEach(k=>$(k).innerHTML="");
+  $("steps").innerHTML=STEPS.map(([id,name],n)=>`<div class="step waiting" id="step-${id}"><i class="num">${n+1}</i><div><b>${esc(name)}</b><span>Waiting</span></div></div>`).join("");
   $("steps").style.display="grid";
 }
 function showError(msg){const e=$("error");e.textContent=msg;e.style.display="block";}
 
 function renderPr(pr){
-  const safe=pr.url.startsWith("https://github.com/");
-  const title=safe?`<a href="${esc(pr.url)}" target="_blank" rel="noopener">${esc(pr.title)}</a>`:esc(pr.title);
-  $("pr").innerHTML=`<section class="panel"><h2>${title}</h2>
-    <p class="meta">By ${esc(pr.author)} &middot; ${esc(pr.files)} files changed &middot; +${esc(pr.additions)} / -${esc(pr.deletions)}</p>
-    ${pr.truncated?'<p class="meta">The diff was longer than 60,000 characters, so only the first part was analyzed.</p>':""}</section>`;
+  const safe=String(pr.url).startsWith("https://github.com/");
+  const t=safe?`<a href="${esc(pr.url)}" target="_blank" rel="noopener">${esc(pr.title)}</a>`:esc(pr.title);
+  $("pr").innerHTML=`<section class="card"><div class="label">Pull request</div><h2>${t}</h2>
+    <div class="chips"><span class="chip">By ${esc(pr.author)}</span><span class="chip">${esc(pr.files)} files changed</span><span class="chip add">+${esc(pr.additions)}</span><span class="chip del">-${esc(pr.deletions)}</span></div>
+    ${pr.truncated?'<p class="hint">The diff was longer than 60,000 characters, so only the first part was analyzed.</p>':""}</section>`;
 }
-function issueHtml(i){
-  return `<article class="issue ${esc(i.severity)}"><div><span class="sev">${esc(i.severity)}</span><strong>${esc(i.title)}</strong></div>
-    <code>${esc(i.file)}</code><p>${esc(i.detail)}</p><p class="fix"><b>Fix:</b> ${esc(i.suggestion)}</p></article>`;
+function renderVerdict(d){
+  $("verdict").innerHTML=`<section class="card v-${esc(d.verdict)}"><div class="label">Verdict</div><div class="big">${esc(VERDICT[d.verdict])}</div><p>${esc(d.summary)}</p></section>`;
 }
-function renderIssues(id,issues){
-  const name=id==="bugs"?"Bugs":"Security";
-  const count=issues.length?`${issues.length} finding${issues.length>1?"s":""}`:"nothing found";
-  $(id).innerHTML=`<section class="panel"><h2>${name}: ${count}</h2>${issues.map(issueHtml).join("")}</section>`;
-}
-const VERDICT={approve:"Looks good to merge",request_changes:"Changes needed",comment:"Worth a look"};
-function renderVerdict(ev){
-  $("verdict").innerHTML=`<section class="panel verdict ${esc(ev.verdict)}"><h2>${VERDICT[ev.verdict]}</h2><p>${esc(ev.summary)}</p></section>`;
-}
-
-let cur={};
-const POINTS={high:25,medium:10,low:3};
-const LEVEL={low:"Low risk",medium:"Medium risk",high:"High risk"};
 function calcScore(all){
   const rows=["high","medium","low"].map(s=>{const n=all.filter(i=>i.severity===s).length;return {sev:s,n:n,pts:POINTS[s],total:n*POINTS[s]};});
   const score=Math.min(100,rows.reduce((a,r)=>a+r.total,0));
   return {rows:rows,score:score,level:score<=30?"low":score<=60?"medium":"high"};
 }
+function allIssues(d){return [].concat(d.bugs||[],d.security||[]);}
 function countUp(el,to){
   if(matchMedia("(prefers-reduced-motion:reduce)").matches||to===0){el.textContent=to;return;}
   const t0=performance.now();
   (function tick(t){const p=Math.min(1,(t-t0)/1000);el.textContent=Math.round(to*p);if(p<1)requestAnimationFrame(tick);})(t0);
 }
-function allIssues(d){return [].concat(d.bugs||[],d.security||[]);}
 function renderScore(d){
   const r=calcScore(allIssues(d));
-  $("score").innerHTML=`<section class="panel risk-${r.level}"><h2>Release risk</h2>
-    <div class="score-top"><span class="score-num" id="num">0</span><span class="meta">/ 100</span><span class="score-label">${LEVEL[r.level]}</span></div>
+  $("score").innerHTML=`<section class="card risk-${r.level}"><div class="label">Release risk</div>
+    <div class="score-top"><span class="score-num" id="num">0</span><span class="label">/ 100</span><span class="score-label">${LEVEL[r.level]}</span></div>
     <div class="bar"><i id="fill"></i></div>
+    <details><summary>How is this calculated?</summary>
     <table><thead><tr><th>Severity</th><th>Findings</th><th>Points each</th><th>Total</th></tr></thead><tbody>
     ${r.rows.map(x=>`<tr><td>${x.sev}</td><td>${x.n}</td><td>${x.pts}</td><td>${x.total}</td></tr>`).join("")}</tbody></table>
-    <p class="meta">Estimated risk from the issues found, capped at 100. It is not a guarantee.</p></section>`;
+    <p class="hint">Estimated risk from the issues found, capped at 100. It is not a guarantee.</p></details></section>`;
   requestAnimationFrame(()=>{$("fill").style.width=r.score+"%";});
   countUp($("num"),r.score);
 }
+function findingHtml(i){
+  return `<article class="finding sev-${esc(i.severity)}"><div class="f-head"><span class="pill">${esc(SEV[i.severity]||i.severity)}</span><span class="cat">${esc(i.cat)}</span><strong>${esc(i.title)}</strong></div>
+    ${i.file?`<div class="f-file">${esc(i.file)}</div>`:""}
+    <dl><dt>What is wrong</dt><dd>${esc(i.detail)}</dd><dt>How to fix</dt><dd class="fix">${esc(i.suggestion)}</dd></dl></article>`;
+}
+function renderFindings(){
+  const b=(cur.bugs||[]).map(i=>Object.assign({cat:"Bug"},i));
+  const s=(cur.security||[]).map(i=>Object.assign({cat:"Security"},i));
+  const it={bugs:b,security:s,all:b.concat(s).sort((x,y)=>ORDER[x.severity]-ORDER[y.severity])};
+  const wait={bugs:cur.bugs===undefined,security:cur.security===undefined};
+  wait.all=wait.bugs||wait.security;
+  const tabs=[["all","All"],["bugs","Bugs"],["security","Security"]];
+  const list=it[tab];
+  $("findings").innerHTML=`<section class="card"><h2>Findings</h2>
+    <div class="tabs" role="tablist">${tabs.map(([k,n])=>`<button type="button" role="tab" aria-selected="${tab===k}" class="tab${tab===k?" active":""}" data-tab="${k}">${n}<span class="n">${wait[k]?"...":it[k].length}</span></button>`).join("")}</div>
+    ${list.length?list.map(findingHtml).join(""):`<p class="hint">${wait[tab]?"Still checking...":"No findings in this category."}</p>`}</section>`;
+  document.querySelectorAll(".tab").forEach(btn=>{btn.onclick=()=>{tab=btn.dataset.tab;renderFindings();};});
+}
+
 function report(d){
   const r=calcScore(allIssues(d));
   const sec=(t,a)=>"## "+t+": "+(a.length?a.length+" finding"+(a.length>1?"s":""):"nothing found")+"\n\n"+
@@ -373,6 +406,7 @@ function showActions(d){
   $("actions").innerHTML='<button type="button" class="ghost" id="dl">Download report</button>';
   $("dl").onclick=()=>download(d);
 }
+
 const HKEY="code-sentinel-history";
 function loadHistory(){try{return JSON.parse(localStorage.getItem(HKEY))||[];}catch(e){return [];}}
 function saveHistory(d){
@@ -383,16 +417,15 @@ function saveHistory(d){
 }
 function renderHistory(){
   const list=loadHistory();
-  $("history").innerHTML=list.length?`<details><summary>Recent reviews (${list.length})</summary>
-    ${list.map((h,i)=>`<button type="button" class="hist" data-i="${i}"><span>${esc(h.pr.title)}</span><span class="meta">${esc(h.score)}/100 &middot; ${esc(h.when)}</span></button>`).join("")}
-    <button type="button" class="ghost" id="clear" style="margin-top:8px">Clear history</button></details>`:"";
+  $("history").innerHTML=list.length?`<details class="card"><summary>Recent reviews (${list.length})</summary>
+    ${list.map((h,i)=>`<button type="button" class="hist" data-i="${i}"><span>${esc(h.pr.title)}</span><span class="label">${esc(h.score)}/100 &middot; ${esc(h.when)}</span></button>`).join("")}
+    <button type="button" class="ghost" id="clear" style="margin-top:10px">Clear history</button></details>`:"";
   document.querySelectorAll(".hist").forEach(b=>{b.onclick=()=>openSaved(list[b.dataset.i]);});
   const c=$("clear");if(c)c.onclick=()=>{try{localStorage.removeItem(HKEY);}catch(e){}renderHistory();};
 }
 function openSaved(d){
-  resetUI();$("steps").style.display="none";cur=d;
-  renderPr(d.pr);renderIssues("bugs",d.bugs||[]);renderIssues("security",d.security||[]);
-  renderVerdict(d);renderScore(d);showActions(d);
+  resetUI();$("steps").style.display="none";cur=d;tab="all";$("results").hidden=false;
+  renderPr(d.pr);renderFindings();renderVerdict(d);renderScore(d);showActions(d);
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
@@ -400,12 +433,12 @@ function handle(ev){
   setStep(ev.step,ev.status);
   if(ev.status==="error"){showError(ev.error);return;}
   if(ev.status!=="done")return;
-  if(ev.step==="fetch"){cur={pr:ev.pr};renderPr(ev.pr);}
+  if(ev.step==="fetch"){cur={pr:ev.pr};tab="all";$("results").hidden=false;renderPr(ev.pr);}
   else if(ev.step==="summary"){
     cur.verdict=ev.verdict;cur.summary=ev.summary;
-    renderVerdict(ev);renderScore(cur);showActions(cur);saveHistory(cur);
+    renderVerdict(cur);renderScore(cur);showActions(cur);saveHistory(cur);
   }
-  else{cur[ev.step]=ev.issues;renderIssues(ev.step,ev.issues);}
+  else{cur[ev.step]=ev.issues;renderFindings();}
 }
 
 $("form").addEventListener("submit",async e=>{
@@ -429,7 +462,6 @@ renderHistory();
 </script>
 </body>
 </html>{% endraw %}"""
-
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=5000, threaded=True, debug=False)
